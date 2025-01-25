@@ -11,7 +11,6 @@ export default class SaveTaskUseCase
   constructor(private readonly taskRepository: TaskRepository) {}
 
   async handle(dto: SaveTaskDto): Promise<Task> {
-    // todo-done IMPLEMENT HERE : VALIDATION DTO, DATA SAVING, ERROR CATCHING
     try {
       const data = {
         id: dto.id || undefined,
