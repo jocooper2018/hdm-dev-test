@@ -27,8 +27,8 @@ const TodoPage = () => {
     const taskName = taskEdits[id]?.trim();
 
     if (taskName && taskName !== tasks.find(task => task.id === id)?.name) {
-      await api.patch(`/tasks/${id}`, { name: taskName }); // Mise à jour via API
-      await handleFetchTasks(); // Rafraîchissement de la liste des tâches
+      await api.patch(`/tasks/${id}`, { name: taskName });
+      await handleFetchTasks();
     }
   }
 
@@ -36,6 +36,11 @@ const TodoPage = () => {
   const handleEditChange = (id: number, value: string) => {
     setTaskEdits(prev => ({ ...prev, [id]: value }));
   };
+
+  const handleCreate = async () => {
+    await api.post('/tasks', { name: 'New task' });
+    await handleFetchTasks();
+  }
 
   useEffect(() => {
     (async () => {
@@ -70,12 +75,12 @@ const TodoPage = () => {
               <Box>
                 <IconButton 
                   color="success"
-                  disabled={!(taskEdits[task.id]?.trim() && taskEdits[task.id]?.trim() !== task.name)} // Ajout : Contrôle du bouton
-                  onClick={() => handleSave(task.id)} // Ajout : Sauvegarde de la tâche
+                  disabled={!(taskEdits[task.id]?.trim() && taskEdits[task.id]?.trim() !== task.name)}
+                  onClick={() => handleSave(task.id)}
                 >
                   <Check />
                 </IconButton>
-                <IconButton color="error" onClick={() => {handleDelete(task.id)}}>
+                <IconButton color="error" onClick={() => handleDelete(task.id)}>
                   <Delete />
                 </IconButton>
               </Box>
@@ -84,7 +89,7 @@ const TodoPage = () => {
         }
 
         <Box display="flex" justifyContent="center" alignItems="center" mt={2}>
-          <Button variant="outlined" onClick={() => {}}>Ajouter une tâche</Button>
+          <Button variant="outlined" onClick={() => handleCreate()}>Ajouter une tâche</Button>
         </Box>
       </Box>
     </Container>
