@@ -35,7 +35,7 @@ export default class TaskRepository {
       where: {
         id: data.id as number,
       },
-      data: data as Prisma.TaskUpdateInput
-    })
+      data: data as Prisma.TaskUpdateInput,
+    });
   }
 }
