@@ -32,13 +32,12 @@ const TodoPage = () => {
     }
   };
 
-  // Mise à jour des champs de texte
   const handleEditChange = (id: number, value: string) => {
     setTaskEdits((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleCreate = async () => {
-    await api.post('/tasks', { name: 'New task' });
+    await api.post('/tasks', { name: 'Nouvelle Tâche' });
     await handleFetchTasks();
   };
 
